@@ -239,9 +239,9 @@ namespace Microsoft.Xna.Framework.Graphics
         internal void DrawInto( SpriteBatch spriteBatch, ref CharacterSource text, Vector2 position, Color color,
 			                    float rotation, Vector2 origin, Vector2 scale, SpriteEffects effect, float depth)
 		{
-            var flipAdjustment = Vector2.Zero;
+            //var flipAdjustment = Vector2.Zero;
 
-            var flippedVert = (effect & SpriteEffects.FlipVertically) == SpriteEffects.FlipVertically;
+            /*var flippedVert = (effect & SpriteEffects.FlipVertically) == SpriteEffects.FlipVertically;
             var flippedHorz = (effect & SpriteEffects.FlipHorizontally) == SpriteEffects.FlipHorizontally;
 
             if (flippedVert || flippedHorz)
@@ -262,7 +262,7 @@ namespace Microsoft.Xna.Framework.Graphics
                     scale.Y *= -1;
                     flipAdjustment.Y = LineSpacing - size.Y;
                 }
-            }
+            }*/
 
             // TODO: This looks excessive... i suspect we could do most
             // of this with simple vector math and avoid this much matrix work.
@@ -271,7 +271,7 @@ namespace Microsoft.Xna.Framework.Graphics
             Matrix.CreateTranslation(-origin.X, -origin.Y, 0f, out transformation);
             Matrix.CreateScale(scale.X, scale.Y, 1f, out temp);
             Matrix.Multiply(ref transformation, ref temp, out transformation);
-            Matrix.CreateTranslation(flipAdjustment.X, flipAdjustment.Y, 0, out temp);
+            //Matrix.CreateTranslation(flipAdjustment.X, flipAdjustment.Y, 0, out temp);
             Matrix.Multiply(ref temp, ref transformation, out transformation);
             Matrix.CreateRotationZ(rotation, out temp);
             Matrix.Multiply(ref transformation, ref temp, out transformation);
@@ -319,12 +319,12 @@ namespace Microsoft.Xna.Framework.Graphics
                 offset.X += currentGlyph.LeftSideBearing;
                 var p = offset;
 
-				if (flippedHorz)
-                    p.X += currentGlyph.BoundsInTexture.Width;
+				/*if (flippedHorz)
+                    p.X += currentGlyph.BoundsInTexture.Width;*/
                 p.X += currentGlyph.Cropping.X;
 
-				if (flippedVert)
-                    p.Y += currentGlyph.BoundsInTexture.Height - LineSpacing;
+				/*if (flippedVert)
+                    p.Y += currentGlyph.BoundsInTexture.Height - LineSpacing;*/
                 p.Y += currentGlyph.Cropping.Y;
 
 				Vector2.Transform(ref p, ref transformation, out p);
